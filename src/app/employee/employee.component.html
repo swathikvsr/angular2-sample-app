@@ -1,0 +1,27 @@
+﻿<div>
+    <label id="name">Name:</label>
+    <input type="text" id="employeeName" [(ngModel)]="currentEmployee.Name" />
+
+    <br />
+    <label id="ID">ID:</label>
+    <input type="text" id="employeeID" [(ngModel)]="currentEmployee.Id" />
+    <br />
+    <label id="MobileNo">MobileNo:</label>
+    <input type="text" id="MobileNo" [(ngModel)]="currentEmployee.MobileNo" />
+    <br />
+    <label id="Department">Department:</label>
+    <input type="text" id="Department" [(ngModel)]="currentEmployee.Department" />
+    <br />
+    <select [ngModel]="employeeType" (ngModelChange)="OnTypeChanged($event)">
+        <option value="HOD">HOD
+        </option>
+               <option value="EMP">EMP
+        </option>
+    </select>
+    <input type="button" (click)="submit()" [disabled]="!(currentEmployee.IsValid())" id="submit" value="Submit" />
+    <input type="button" (click)="cancel()" id="clear" value="Clear" />
+    <br/>
+     {{currentEmployee.Name}}<br/>
+    <grid-UI [grid-data]="employees"  [grid-entityname]="'employee'"  (grid-selected)="Select($event)"></grid-UI>
+    
+</div>

@@ -1,0 +1,14 @@
+Displaying records for {{EntityName}}
+<table>
+    <tr>
+        <td *ngFor="let colName of gridColumns">
+            {{colName}}
+        </td>
+    </tr>
+    <tr *ngFor="let colObj of gridData">
+        <td *ngFor="let colName of gridColumns">
+            {{colObj[colName]}}
+        </td>
+        <td><a href="#" (click)="Select(colObj)">Select</a></td>
+    </tr>
+</table>
