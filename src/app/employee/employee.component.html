@@ -1,27 +1,44 @@
-﻿<div>
-    <label id="name">Name:</label>
-    <input type="text" id="employeeName" [(ngModel)]="currentEmployee.Name" />
+﻿<form [formGroup]='currentEmployee.EmployeeFormValidator'>
+    pristine {{currentEmployee.EmployeeFormValidator.pristine}}<br /> touched {{currentEmployee.EmployeeFormValidator.touched}}<br
+    />
+    <div>
+        <label id="name">Name:</label>
+        <input type="text" id="employeeName" formControlName="Name" [(ngModel)]="currentEmployee.Name" />
+        <div *ngIf="(currentEmployee.IsDirty('Name')==true)" [hidden]="currentEmployee.IsValid('Name','required')">
+            Employee Name is required</div>
+    </div>
+    <div>
+        <label id="ID">ID:</label>
+        <input type="text" id="employeeID" formControlName="Id" [(ngModel)]="currentEmployee.Id" />
+        <div *ngIf="(currentEmployee.IsDirty('Id')==true)" [hidden]="currentEmployee.IsValid('Id','required')">
+            Employee ID is required</div>
+        <div *ngIf="(currentEmployee.IsDirty('Id')==true)" [hidden]="currentEmployee.IsValid('Id','pattern')">
+            Employee Code should be of a format C1001,X9008</div>
+        <br />
+    </div>
+    <div>
+        <label id="MobileNo">MobileNo:</label>
+        <input type="text" id="MobileNo" class="form-control" [(ngModel)]="currentEmployee.MobileNo" formControlName="MobileNo" />
+        <div *ngIf="(currentEmployee.IsDirty('MobileNo')==true)" [hidden]="currentEmployee.IsValid('MobileNo','required')">
+            Employee MobileNo is required</div>
+    </div>
+    <div>
+        <label id="Department">Department:</label>
+        <input type="text" id="Department" class="form-control" [(ngModel)]="currentEmployee.Department" formControlName="Department"
+        />
 
-    <br />
-    <label id="ID">ID:</label>
-    <input type="text" id="employeeID" [(ngModel)]="currentEmployee.Id" />
-    <br />
-    <label id="MobileNo">MobileNo:</label>
-    <input type="text" id="MobileNo" [(ngModel)]="currentEmployee.MobileNo" />
-    <br />
-    <label id="Department">Department:</label>
-    <input type="text" id="Department" [(ngModel)]="currentEmployee.Department" />
-    <br />
-    <select [ngModel]="employeeType" (ngModelChange)="OnTypeChanged($event)">
+    </div>
+    <div>
+        <select [ngModel]="employeeType" (ngModelChange)="OnTypeChanged($event)" [ngModelOptions]="{standalone:true}">
         <option value="HOD">HOD
         </option>
                <option value="EMP">EMP
         </option>
     </select>
+    </div>
     <input type="button" (click)="submit()" [disabled]="!(currentEmployee.IsValid())" id="submit" value="Submit" />
     <input type="button" (click)="cancel()" id="clear" value="Clear" />
+    <br/> {{currentEmployee.Name}}
     <br/>
-     {{currentEmployee.Name}}<br/>
-    <grid-UI [grid-data]="employees"  [grid-entityname]="'employee'"  (grid-selected)="Select($event)"></grid-UI>
-    
-</div>
+    <grid-UI [grid-data]="employees" [grid-entityname]="'employee'" (grid-selected)="Select($event)"></grid-UI>
+</form>

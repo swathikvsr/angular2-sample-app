@@ -6,11 +6,12 @@ import {AppRoutingModule, routableComponents} from './app-routing.module';
 import { AppComponent }   from './app.component';
 import {FactoryEmployee} from './employee/factory.employee'
 import { GridComponent } from './shared/grid.component';
+import { ReactiveFormsModule } from '@angular/forms';
 @NgModule({
     imports: [
     BrowserModule,FormsModule,
     HttpModule,
-    AppRoutingModule
+    AppRoutingModule,ReactiveFormsModule
   ],
     declarations: [
         AppComponent,routableComponents,GridComponent
