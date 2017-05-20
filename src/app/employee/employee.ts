@@ -47,6 +47,16 @@ export class Employee {
         }
 
     }
+
+    AllValid():boolean
+    {
+        //enable only on these validations holds true
+        if(this.IsValid("Name", "required") && this.IsValid("MobileNo", "pattern") && this.IsValid("Id", "required") )
+        {
+            return true;
+        }
+        return false;
+    }
 }
 export class EmployeeHead extends Employee {
 
