@@ -1,3 +1,4 @@
+//shared component
 import { Component,
         Input,
         Output,
@@ -34,6 +35,7 @@ export class GridComponent {
             this.gridData = _gridData;
         }
     }
+    //emit the event after clicking on select
     Select(_selected: Object) {
         this.selected.emit(_selected);
     }

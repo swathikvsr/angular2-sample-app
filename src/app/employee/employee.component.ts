@@ -16,10 +16,12 @@ export class EmployeeComponent {
         this.factoryEmployee = _factoryEmployee;
         this.currentEmployee = this.factoryEmployee.Create(this.employeeType);
     }
+    //on changing tpe from drop down event to trigger
     OnTypeChanged(_type:string) {
         this.employeeType = _type;
         this.currentEmployee = this.factoryEmployee.Create(_type);
     }
+    //on select from the grid component
     Select(empSelected: Employee) {
         this.currentEmployee = this.factoryEmployee.Create(this.employeeType);
         this.currentEmployee.Name = empSelected.Name;
@@ -28,12 +30,14 @@ export class EmployeeComponent {
         this.currentEmployee.Department = empSelected.Department;
         this.employeeType = empSelected.EmpType;
     }
+    //on subimt
     submit() {
         this.employees.push(this.currentEmployee);
         this.employees = this.employees.slice();
         this.currentEmployee = new Employee();
         console.log("Success");
     }
+    //on clear click
     cancel() {
         this.currentEmployee = new Employee();
         console.log("Success");

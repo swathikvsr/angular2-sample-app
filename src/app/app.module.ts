@@ -1,4 +1,5 @@
-﻿import { NgModule } from '@angular/core';
+﻿//main app module
+import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
@@ -19,4 +20,5 @@ import { ReactiveFormsModule } from '@angular/forms';
     providers:[FactoryEmployee],
     bootstrap: [AppComponent]
 })
+//export app module
 export class AppModule { }

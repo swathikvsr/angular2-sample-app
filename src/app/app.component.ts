@@ -1,3 +1,4 @@
+//main cpmponent
 import { Component,
         Input,
         Output,

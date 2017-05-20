@@ -6,9 +6,9 @@ import {AppComponent} from './app.component';
 
 
 const routes: Routes = [
-  { path: '', pathMatch: 'full', redirectTo: 'app' },
+  { path: '', pathMatch: 'full', redirectTo: 'app' },//on start
   
-  { path: 'employee', component: EmployeeComponent  },
+  { path: 'employee', component: EmployeeComponent  },//on demand
 ];
 
 @NgModule({

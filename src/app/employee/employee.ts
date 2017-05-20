@@ -16,15 +16,17 @@ export class Employee {
 
     constructor() {
         var _builder = new FormBuilder();
+        //vaildation rules established here
         this.EmployeeFormValidator = _builder.group({ // <-- the parent FormGroup
             Name: ['', Validators.required],
             MobileNo: ['', Validators.pattern("[0-9]")],
-            Id: ['',  Validators.compose([Validators.required,
-                                Validators.pattern("^[A-Z]{1,1}[0-9]{4,4}$")])],
+            Id: ['', Validators.compose([Validators.required,
+            Validators.pattern("^[A-Z]{1,1}[0-9]{4,4}$")])],
             Department: ''
         })
     }
-    IsDirty(controlname:string): boolean {
+    //custom validations to throw error based on the name of the control sent
+    IsDirty(controlname: string): boolean {
         if (controlname == undefined) {
             return this.EmployeeFormValidator.dirty;
         }
@@ -34,8 +36,9 @@ export class Employee {
         }
 
     }
-    IsValid(controlname:string, typeofvalidation:string): boolean {
-             if (controlname==undefined) {
+   //custom validations to throw error based on the name of the control and type of validation sent
+    IsValid(controlname: string, typeofvalidation: string): boolean {
+        if (controlname == undefined) {
             return this.EmployeeFormValidator.valid;
         }
         else {
