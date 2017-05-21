@@ -5,7 +5,7 @@ export function fakeBackendFactory(backend: MockBackend, options: BaseRequestOpt
     // array in local storage for registered users
     let users: any[] = JSON.parse(localStorage.getItem('users')) || [];
     let employees = [
-      { Id: 1, Name: 'Windstorm', MobileNo:"", Department:"physics", EmpType:"EMP" }
+        { Id: 1, Name: 'Windstorm', MobileNo: "", Department: "physics", EmpType: "EMP" }
     ];
     // configure fake backend
     backend.connections.subscribe((connection: MockConnection) => {
@@ -13,28 +13,29 @@ export function fakeBackendFactory(backend: MockBackend, options: BaseRequestOpt
         setTimeout(() => {
 
             if (connection.request.url.endsWith('/api/getEmployees') && connection.request.method === RequestMethod.Get) {
-                    // get users
-                     connection.mockRespond(new Response(new ResponseOptions({ status: 200, body: employees })));
+                // get users
+                connection.mockRespond(new Response(new ResponseOptions({ status: 200, body: employees })));
+                return;
+            }
+
+            // create user
+            if (connection.request.url.endsWith('/api/getEmployees') && connection.request.method === RequestMethod.Post) {
+                // get new employee object from post body
+                let newEmp = JSON.parse(connection.request.getBody());
+
+                // validation
+                let duplicateUser = employees.filter(emp => { return emp.Name === newEmp.Name; }).length;
+                if (duplicateUser) {
+                    return connection.mockError(new Error('Employeename "' + newEmp.username + '" is already taken'));
                 }
 
-                // create user
-                if (connection.request.url.endsWith('/api/getEmployees') && connection.request.method === RequestMethod.Post) {
-                    // get new employee object from post body
-                    let newEmp = JSON.parse(connection.request.getBody());
+                // save new employee
+                employees.push(newEmp);
 
-                    // validation
-                    let duplicateUser = employees.filter(emp => { return emp.Name === newEmp.Name; }).length;
-                    if (duplicateUser) {
-                        return connection.mockError(new Error('Employeename "' + newEmp.username + '" is already taken'));
-                    }
-
-                    // save new employee
-                    employees.push(newEmp);
-
-                    // respond 200 OK
-                    connection.mockRespond(new Response(new ResponseOptions({ status: 200 })));
-                    return;
-                }
+                // respond 200 OK
+                connection.mockRespond(new Response(new ResponseOptions({ status: 200 })));
+                return;
+            }
 
 
             // pass through any requests not handled above

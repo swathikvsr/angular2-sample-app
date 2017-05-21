@@ -18,7 +18,7 @@ export class EmployeeService {
 
   getEmployees(): Observable<Employee[]> {
     return this.http.get(this.empUrl)
-                    .map(this.extractData)
+                    .map((response: Response) => response.json())
                     .catch(this.handleError);
   }
 
@@ -26,13 +26,16 @@ export class EmployeeService {
     let headers = new Headers({ 'Content-Type': 'application/json' });
     let options = new RequestOptions({ headers: headers });
 
-    return this.http.post(this.empUrl, { Id:emp.Id, Name:emp.Name, MobileNo:emp.MobileNo, Department:emp.Department }, options).map(this.extractData)
+    return this.http.post(this.empUrl, { Id:emp.Id, Name:emp.Name, MobileNo:emp.MobileNo, Department:emp.Department }, options)
+                    .map((response: Response) => response.json())
                     .catch(this.handleError);
   }
 
   private extractData(res: Response) {
     let body = res.json();
+    if(body != undefined)
     return body.data || { };
+    else res.status;
   }
 
   private handleError (error: Response | any) {

@@ -21,7 +21,11 @@ export class EmployeeComponent {
         this.factoryEmployee = _factoryEmployee;
         this.currentEmployee = this.factoryEmployee.Create(this.employeeType);
         this.employeeService = empService;
+        
     }
+
+      ngOnInit() { this.getData(); }
+
     //on changing tpe from drop down event to trigger
     OnTypeChanged(_type: string) {
         this.employeeType = _type;
@@ -37,15 +41,15 @@ export class EmployeeComponent {
         this.employeeType = empSelected.EmpType;
     }
     //on subimt
-    Add() {
+getData() {
         /*this.employees.push(this.currentEmployee);
         this.employees = this.employees.slice();
         this.currentEmployee = new Employee();*/
         this.employeeService.getEmployees()
-            .subscribe(employees => 
-                this.employees = employees
-              //  this.employees = this.employees.slice();
-            //    this.currentEmployee = new Employee();
+            .subscribe(employees => {
+                this.employees = employees;
+                this.employees = this.employees.slice();
+                this.currentEmployee = new Employee();}
             , error => this.errorMessage = <any>error); 
         console.log("Success");
     }
