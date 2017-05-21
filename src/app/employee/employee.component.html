@@ -36,6 +36,7 @@
         </option>
     </select>
     </div>
+     <input type="button" (click)="Add()" [disabled]="!(currentEmployee.AllValid())" id="Add" value="Add" />
     <input type="button" (click)="submit()" [disabled]="!(currentEmployee.AllValid())" id="submit" value="Submit" />
     <input type="button" (click)="cancel()" id="clear" value="Clear" />
     <br/> {{currentEmployee.Name}}

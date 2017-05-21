@@ -3,11 +3,16 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
-import {AppRoutingModule, routableComponents} from './app-routing.module';
+// used to create fake backend
+import { fakeBackendProvider } from './helpers/index';
+import { MockBackend, MockConnection } from '@angular/http/testing';
+import { BaseRequestOptions } from '@angular/http';
+
+import {AppRoutingModule, RoutableComponents} from './app-routing.module';
 import { AppComponent }   from './app.component';
 import {FactoryEmployee} from './employee/factory.employee'
-import { GridComponent } from './shared/grid.component';
 import { ReactiveFormsModule } from '@angular/forms';
+
 @NgModule({
     imports: [
     BrowserModule,FormsModule,
@@ -15,9 +20,16 @@ import { ReactiveFormsModule } from '@angular/forms';
     AppRoutingModule,ReactiveFormsModule
   ],
     declarations: [
-        AppComponent,routableComponents,GridComponent
+        AppComponent,
+        RoutableComponents
     ],
-    providers:[FactoryEmployee],
+    providers:[
+        FactoryEmployee,
+            // providers used to create fake backend
+        fakeBackendProvider,
+        MockBackend,
+        BaseRequestOptions
+        ],
     bootstrap: [AppComponent]
 })
 //export app module

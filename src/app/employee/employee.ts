@@ -19,7 +19,7 @@ export class Employee {
         //vaildation rules established here
         this.EmployeeFormValidator = _builder.group({ // <-- the parent FormGroup
             Name: ['', Validators.required],
-            MobileNo: ['', Validators.pattern("[0-9]")],
+            MobileNo: ['', Validators.pattern("^[0-9]+$")],
             Id: ['', Validators.compose([Validators.required,
             Validators.pattern("^[A-Z]{1,1}[0-9]{4,4}$")])],
             Department: ''
@@ -51,7 +51,7 @@ export class Employee {
     AllValid():boolean
     {
         //enable only on these validations holds true
-        if(this.IsValid("Name", "required") && this.IsValid("MobileNo", "pattern") && this.IsValid("Id", "required") )
+        if(this.IsValid("Name", "required")  && this.IsValid("Id", "required") && this.IsValid("MobileNo", "pattern"))
         {
             return true;
         }
