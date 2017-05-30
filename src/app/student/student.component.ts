@@ -6,7 +6,7 @@ import { Component,
         EventEmitter,} from "@angular/core";
 @Component({
     selector: 'student-UI',
-    template: `<div> welcome to student details </div>`
+    template: `<div class="col-md-6 col-md-offset-3"> welcome to student details </div>`
 })
 export class StudentComponent {
    

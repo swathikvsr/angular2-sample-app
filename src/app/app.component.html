@@ -1,8 +1,10 @@
-<div>
+<div class="container">
   <header>
-    <h1>Employee/Student tracker</h1>
+    <div class="row">
+      <h1 class="col-md-6 col-md-offset-3">Employee/Student Tracker</h1>
+    </div>
     <nav>
-      <ul>
+      <ul class="col-md-6 col-md-offset-3">
         <li><a [routerLink]="['/employee']" href="">Employee</a></li>
         <li><a [routerLink]="['/student']" href="">student</a></li>
       </ul>
@@ -14,4 +16,3 @@
     </section>
   </main>
 </div>
-

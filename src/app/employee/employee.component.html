@@ -1,31 +1,34 @@
-﻿<form [formGroup]='currentEmployee.EmployeeFormValidator'>
+﻿<form [formGroup]='currentEmployee.EmployeeFormValidator' class="col-md-6 col-md-offset-3">
     pristine {{currentEmployee.EmployeeFormValidator.pristine}}<br /> touched {{currentEmployee.EmployeeFormValidator.touched}}<br
     />
-    <div>
+    <div class="form-group">
         <label id="name">Name:</label>
-        <input type="text" id="employeeName" formControlName="Name" [(ngModel)]="currentEmployee.Name" />
+        <input class="form-control" type="text" id="employeeName" formControlName="Name" [(ngModel)]="currentEmployee.Name" placeholder="Name"
+        />
         <div *ngIf="(currentEmployee.IsDirty('Name')==true)" [hidden]="currentEmployee.IsValid('Name','required')">
             Employee Name is required</div>
     </div>
-    <div>
+    <div class="form-group">
         <label id="ID">ID:</label>
-        <input type="text" id="employeeID" formControlName="Id" [(ngModel)]="currentEmployee.Id" />
+        <input class="form-control" type="text" id="employeeID" formControlName="Id" [(ngModel)]="currentEmployee.Id" placeholder="ID"
+        />
         <div *ngIf="(currentEmployee.IsDirty('Id')==true)" [hidden]="currentEmployee.IsValid('Id','required')">
             Employee ID is required</div>
         <div *ngIf="(currentEmployee.IsDirty('Id')==true)" [hidden]="currentEmployee.IsValid('Id','pattern')">
             Employee Code should be of a format C1001,X9008</div>
-        <br />
+
     </div>
-    <div>
+    <div class="form-group">
         <label id="MobileNo">MobileNo:</label>
-        <input type="text" id="MobileNo" class="form-control" [(ngModel)]="currentEmployee.MobileNo" formControlName="MobileNo" />
+        <input class="form-control" type="text" id="MobileNo" class="form-control" [(ngModel)]="currentEmployee.MobileNo" formControlName="MobileNo"
+            placeholder="+64" />
         <div *ngIf="(currentEmployee.IsDirty('MobileNo')==true)" [hidden]="currentEmployee.IsValid('MobileNo','required')">
             Employee MobileNo is required</div>
     </div>
-    <div>
+    <div class="form-group">
         <label id="Department">Department:</label>
-        <input type="text" id="Department" class="form-control" [(ngModel)]="currentEmployee.Department" formControlName="Department"
-        />
+        <input class="form-control" type="text" id="Department" class="form-control" [(ngModel)]="currentEmployee.Department" formControlName="Department"
+            placeholder="DeptID" />
 
     </div>
     <div>
@@ -36,9 +39,11 @@
         </option>
     </select>
     </div>
-     <input type="button" (click)="submit()" [disabled]="!(currentEmployee.AllValid())" id="Add" value="Add" />
-    <input type="button" (click)="submit()" [disabled]="!(currentEmployee.AllValid())" id="submit" value="Submit" />
-    <input type="button" (click)="cancel()" id="clear" value="Clear" />
+    <input type="button" class="btn btn-primary" (click)="submit()" [disabled]="!(currentEmployee.AllValid())" id="Add" value="Add"
+    />
+    <input type="button" class="btn btn-primary" (click)="submit()" [disabled]="!(currentEmployee.AllValid())" id="submit" value="Submit"
+    />
+    <input type="button" class="btn btn-primary" (click)="cancel()" id="clear" value="Clear" />
     <br/> {{currentEmployee.Name}}
     <br/>
     <grid-UI [grid-data]="employees" [grid-entityname]="'employee'" (grid-selected)="Select($event)"></grid-UI>
