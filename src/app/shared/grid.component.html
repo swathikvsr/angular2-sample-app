@@ -1,14 +1,16 @@
 Displaying records for {{EntityName}}
-<table>
+<table class="table table-striped">
+    <thead>
     <tr>
-        <td *ngFor="let colName of gridColumns">
+        <th *ngFor="let colName of gridColumns">
             {{colName}}
-        </td>
+        </th>
     </tr>
+    </thead>
     <tr *ngFor="let colObj of gridData">
         <td *ngFor="let colName of gridColumns">
             {{colObj[colName]}}
         </td>
-        <td><a href="#" (click)="Select(colObj)">Select</a></td>
+        <td><a [routerLink]="['/employee']" (click)="Select(colObj)">Select</a></td>
     </tr>
 </table>

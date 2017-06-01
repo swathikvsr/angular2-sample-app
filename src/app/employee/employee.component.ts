@@ -16,15 +16,17 @@ export class EmployeeComponent {
     factoryEmployee: FactoryEmployee = null;
     employeeService: EmployeeService = null;
     errorMessage: string;
-
+    saveSuccess: boolean = false;
     constructor(_factoryEmployee: FactoryEmployee, empService: EmployeeService) {
         this.factoryEmployee = _factoryEmployee;
         this.currentEmployee = this.factoryEmployee.Create(this.employeeType);
         this.employeeService = empService;
-        
+
     }
 
-      ngOnInit() { this.getData(); }
+    ngOnInit() { this.getData(); }
+
+    ngOnChanges() {this.saveSuccess = false;}
 
     //on changing tpe from drop down event to trigger
     OnTypeChanged(_type: string) {
@@ -41,7 +43,7 @@ export class EmployeeComponent {
         this.employeeType = empSelected.EmpType;
     }
     //on subimt
-getData() {
+    getData() {
         /*this.employees.push(this.currentEmployee);
         this.employees = this.employees.slice();
         this.currentEmployee = new Employee();*/
@@ -49,8 +51,9 @@ getData() {
             .subscribe(employees => {
                 this.employees = employees;
                 this.employees = this.employees.slice();
-                this.currentEmployee = new Employee();}
-            , error => this.errorMessage = <any>error); 
+                this.currentEmployee = new Employee();
+            }
+            , error => this.errorMessage = <any>error);
         console.log("Success");
     }
     //on subimt
@@ -59,13 +62,14 @@ getData() {
                 this.employees = this.employees.slice();
                 this.currentEmployee = new Employee();*/
         this.employeeService.create(this.currentEmployee)
-            .subscribe(() => this.employees.push(this.currentEmployee), error => this.errorMessage = <any>error); 
+            .subscribe(() => { this.employees.push(this.currentEmployee), this.saveSuccess = true }, error => this.errorMessage = <any>error);
         console.log("Success");
         console.log("Success");
     }
     //on clear click
     cancel() {
         this.currentEmployee = new Employee();
+        this.saveSuccess = false;
         console.log("Success");
     }
 } 

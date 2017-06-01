@@ -5,16 +5,16 @@
         <label id="name">Name:</label>
         <input class="form-control" type="text" id="employeeName" formControlName="Name" [(ngModel)]="currentEmployee.Name" placeholder="Name"
         />
-        <div *ngIf="(currentEmployee.IsDirty('Name')==true)" [hidden]="currentEmployee.IsValid('Name','required')">
+        <div *ngIf="(currentEmployee.IsDirty('Name')==true)" [hidden]="currentEmployee.IsValid('Name','required')" class="alert-danger">
             Employee Name is required</div>
     </div>
     <div class="form-group">
         <label id="ID">ID:</label>
         <input class="form-control" type="text" id="employeeID" formControlName="Id" [(ngModel)]="currentEmployee.Id" placeholder="ID"
         />
-        <div *ngIf="(currentEmployee.IsDirty('Id')==true)" [hidden]="currentEmployee.IsValid('Id','required')">
+        <div *ngIf="(currentEmployee.IsDirty('Id')==true)" [hidden]="currentEmployee.IsValid('Id','required')" class="alert-danger">
             Employee ID is required</div>
-        <div *ngIf="(currentEmployee.IsDirty('Id')==true)" [hidden]="currentEmployee.IsValid('Id','pattern')">
+        <div *ngIf="(currentEmployee.IsDirty('Id')==true)" [hidden]="currentEmployee.IsValid('Id','pattern')" class="alert-danger">
             Employee Code should be of a format C1001,X9008</div>
 
     </div>
@@ -22,7 +22,7 @@
         <label id="MobileNo">MobileNo:</label>
         <input class="form-control" type="text" id="MobileNo" class="form-control" [(ngModel)]="currentEmployee.MobileNo" formControlName="MobileNo"
             placeholder="+64" />
-        <div *ngIf="(currentEmployee.IsDirty('MobileNo')==true)" [hidden]="currentEmployee.IsValid('MobileNo','required')">
+        <div *ngIf="(currentEmployee.IsDirty('MobileNo')==true)" [hidden]="currentEmployee.IsValid('MobileNo','required')" class="alert-danger">
             Employee MobileNo is required</div>
     </div>
     <div class="form-group">
@@ -31,13 +31,17 @@
             placeholder="DeptID" />
 
     </div>
-    <div>
-        <select [ngModel]="employeeType" (ngModelChange)="OnTypeChanged($event)" [ngModelOptions]="{standalone:true}">
+    <div class="form-group">
+        <select [ngModel]="employeeType" class="form-control" (ngModelChange)="OnTypeChanged($event)" [ngModelOptions]="{standalone:true}">
         <option value="HOD">HOD
         </option>
                <option value="EMP">EMP
         </option>
     </select>
+    </div>
+    <div class="alert alert-success alert-dismissable" *ngIf="saveSuccess">
+        <a [routerLink]="['/employee']" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <strong>Success!</strong>
     </div>
     <input type="button" class="btn btn-primary" (click)="submit()" [disabled]="!(currentEmployee.AllValid())" id="Add" value="Add"
     />
